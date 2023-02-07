@@ -2,7 +2,6 @@
 const { invoke, convertFileSrc } = window.__TAURI__.tauri;
 const { open, save } = window.__TAURI__.dialog;
 const { sendNotification } = window.__TAURI__.notification;
-const { appDataDir, join } = window.__TAURI__.path;
 
 // elements
 const type_button = document.querySelector("#type_button");
@@ -16,6 +15,7 @@ const placeholder = document.querySelector("#placeholder");
 
 // variables
 const links = [];
+const previews = [];
 
 // set icon type [ .icns | .ico ]
 type_button.addEventListener("click", () => notify(), false);
@@ -37,8 +37,14 @@ async function selectFile(element, index) {
     const display = await file_path.slice(file_path.length - 20, file_path.length);
     // update button name with custom file path name
     element.innerText = "..." + display + " - " + element.innerText;
+    
     let image_path = convertFileSrc(file_path);
-    preview_image.setAttribute("src", image_path);
+    
+    previews[index] = image_path;
+
+    preview_image.setAttribute("src", previews[index]);
+
+    previewSlide(index);
   }
 }
 
@@ -68,26 +74,39 @@ async function notify(body) {
 }
 
 function previewIcon(size) {
-  console.log(size);
+  // console.log(size);
   const preview = (step) => { return size > step * 204 }
   switch (true) {
     case preview(5):
-      placeholder.innerText = "6";
+      if ( !IS_EMPTY(5) && !IS_EQUAL() ) { preview_image.setAttribute("src", previews[5]) }
+      preview_image.width = "512"
       break;
     case preview(4):
-      placeholder.innerText = "5";
+      if ( !IS_EMPTY(4) && !IS_EQUAL() ) { preview_image.setAttribute("src", previews[4]) }
+      preview_image.width = "256"
       break;
     case preview(3):
-      placeholder.innerText = "4";
+      if ( !IS_EMPTY(3) && !IS_EQUAL() ) { preview_image.setAttribute("src", previews[3]) }
+      preview_image.width = "128"
       break;
     case preview(2):
-      placeholder.innerText = "3";
+      if ( !IS_EMPTY(2) && !IS_EQUAL() ) { preview_image.setAttribute("src", previews[2]) }
+      preview_image.style.width = `${preview_image.naturalWidth / 2}`;
+      preview_image.width = "64"
       break;
     case preview(1):
-      placeholder.innerText = "2";
+      if ( !IS_EMPTY(1) && !IS_EQUAL() ) { preview_image.setAttribute("src", previews[1]) }
+      preview_image.width = "32";
       break;
     case preview(0):
-      placeholder.innerText = "1";
+      if ( !IS_EMPTY(0) && !IS_EQUAL() ) { preview_image.setAttribute("src", previews[0]) }
+      preview_image.width = "16";
       break;
   }
 }
+
+function previewSlide(step) { preview_size.value = (step * 204) + 1 }
+
+function IS_EMPTY(index) { return previews[index] === undefined }
+
+function IS_EQUAL(index) { return preview_image.getAttribute("src") === previews[index] }

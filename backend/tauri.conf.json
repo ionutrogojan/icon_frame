@@ -20,9 +20,7 @@
         "all": true
       },
       "protocol": {
-        "assetScope": {
-          "asset": true
-        }
+        "asset": true
       }
     },
     "bundle": {
@@ -66,14 +64,19 @@
     },
     "windows": [
       {
-        "fullscreen": false,
         "title": "Icon Frame",
+        "theme": "Dark",
+        
         "width": 900,
-        "height": 632,
-        "resizable": false,
+        "maxWidth": 900,
         "minWidth": 900,
+        
+        "height": 632,
+        "maxHeight": 632,
         "minHeight": 632,
-        "theme": "Dark"
+        
+        "fullscreen": false,
+        "resizable": false
       }
     ]
   }

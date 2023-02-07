@@ -51,9 +51,11 @@ body {
   display: grid;
   place-items: center;
   position: relative;
+  overflow: hidden;
 }
 
 .image-preview > p {
+  display: none;
   background-color: var(--accent-2);
   color: var(--text-white);
   position: absolute;
@@ -63,6 +65,10 @@ body {
   place-items: center;
   margin: 40%;
   font-size: 40px;
+}
+
+#preview_image {
+  image-rendering: crisp-edges;
 }
 
 .preview-controls {
