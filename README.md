@@ -9,4 +9,4 @@ A small and easy to use icon builder. Build icons for your applications with `.i
 - [x] .icns
 - [ ] .ico
 
-Made wit ❤️ and [Tauri]()
+Made wit ❤️ and [Tauri](https://github.com/tauri-apps/tauri)

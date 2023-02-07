@@ -38,6 +38,7 @@ body {
   grid-template-rows: max-content max-content;
   gap: 24px;
   padding: 24px;
+  overflow: hidden;
 }
 
 .image-preview {
@@ -49,6 +50,19 @@ body {
   grid-row: 1/1;
   display: grid;
   place-items: center;
+  position: relative;
+}
+
+.image-preview > p {
+  background-color: var(--accent-2);
+  color: var(--text-white);
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  display: grid;
+  place-items: center;
+  margin: 40%;
+  font-size: 40px;
 }
 
 .preview-controls {
@@ -135,4 +149,10 @@ body {
   font-size: 16px;
   padding: 0 24px;
   white-space: nowrap;
+}
+
+/* FIXME: outline border radius not working */
+.input:hover, .input:focus, .button:hover {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
 }
