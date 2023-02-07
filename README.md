@@ -7,6 +7,6 @@ A small and easy to use icon builder. Build icons for your applications with `.i
 ### Current save options:
 
 - [x] .icns
-- [] .ico
+- [ ] .ico
 
 Made wit ❤️ and [Tauri]()
