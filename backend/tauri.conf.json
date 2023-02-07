@@ -1,0 +1,75 @@
+{
+  "build": {
+    "beforeDevCommand": "",
+    "beforeBuildCommand": "",
+    "devPath": "../frontend",
+    "distDir": "../frontend",
+    "withGlobalTauri": true
+  },
+  "package": {
+    "productName": "icon-frame",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "dialog": {
+        "open": true,
+        "save": true
+      },
+      "notification": {
+        "all": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "category": "DeveloperTool",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "com.icon-frame.dev",
+      "longDescription": "",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "",
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "title": "Icon Frame",
+        "width": 900,
+        "height": 632,
+        "resizable": false,
+        "minWidth": 900,
+        "minHeight": 632,
+        "theme": "Dark"
+      }
+    ]
+  }
+}
