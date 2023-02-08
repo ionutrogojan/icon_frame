@@ -11,9 +11,10 @@ A small and easy to use icon builder. Build icons for your applications with `.i
 
 Made wit ❤️ and [Tauri](https://github.com/tauri-apps/tauri)
 
-TODO:
-
-    - [ ] file input icons
+TODO::
     - [ ] better slider
-    - [ ] icon format selector
     - [ ] add `.ico` save option
+
+INPROGRESS:
+    - [ ] file input icons
+    - [ ] icon format selector
