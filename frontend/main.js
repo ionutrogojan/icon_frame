@@ -10,12 +10,18 @@ const file_system = document.querySelector("#file_system");
 const file_buttons = Array.from(file_system.children);
 const preview_image = document.querySelector("#preview_image");
 const preview_size = document.querySelector("#preview_size");
+const slider_indicator = document.querySelector("#preview_indicator");
+const indicator_sizes = Array.from(slider_indicator.children);
 
 const placeholder = document.querySelector("#placeholder");
 
 // variables
+const sizes = [ "16px", "32px", "128px", "256px", "512px", "1024px" ];
 const links = [];
 const previews = [];
+const active_accent = [ "#7FCC33", "#765EED", "#5C84D6", "#FF884C" ];
+
+document.body.style = `--active-accent: ${active_accent[Math.floor(Math.random() * active_accent.length)]}`
 
 // set icon type [ .icns | .ico ]
 type_button.addEventListener("click", () => notify(), false);
@@ -25,6 +31,8 @@ file_buttons.forEach((file, index) => { file.addEventListener("click", () => sel
 export_button.addEventListener("click", () => saveFile(), false);
 // show icon preview at specific size
 preview_size.addEventListener("input", () => previewIcon(preview_size.value), false);
+
+indicator_sizes.forEach((size, index) => { size.addEventListener("click", () => previewSlide(index), false) });
 
 async function selectFile(element, index) {
   // get the path to the file
@@ -36,7 +44,7 @@ async function selectFile(element, index) {
     // get the end of the path
     const display = await file_path.slice(file_path.length - 20, file_path.length);
     // update button name with custom file path name
-    element.innerText = "..." + display + " - " + element.innerText;
+    element.innerText = "..." + display + " - " + sizes[index];
     
     let image_path = convertFileSrc(file_path);
     
@@ -71,6 +79,8 @@ async function saveFile() {
 async function notify(body) {
   // notify on success
   sendNotification({ title: "Icon Frame", icon: "../backend/icons/icon.png", body});
+  // reset to default values
+  reset();
 }
 
 function previewIcon(size) {
@@ -91,7 +101,6 @@ function previewIcon(size) {
       break;
     case preview(2):
       if ( !IS_EMPTY(2) && !IS_EQUAL() ) { preview_image.setAttribute("src", previews[2]) }
-      preview_image.style.width = `${preview_image.naturalWidth / 2}`;
       preview_image.width = "64"
       break;
     case preview(1):
@@ -105,7 +114,23 @@ function previewIcon(size) {
   }
 }
 
-function previewSlide(step) { preview_size.value = (step * 204) + 1 }
+function reset() {
+  // empty previews
+  previews.length = 0;
+  // empty file paths
+  links.length = 0;
+  // reset icon preview
+  preview_image.setAttribute("src", "./assets/icon_frame.svg");
+  // reset button text
+  file_buttons.forEach((button, index) => { button.innerText = sizes[index] })
+}
+
+function previewSlide(step) {
+  // update value
+  preview_size.value = (step * 204) + 1;
+  // send event to the event listener
+  preview_size.dispatchEvent(new InputEvent("input"))
+}
 
 function IS_EMPTY(index) { return previews[index] === undefined }
 
