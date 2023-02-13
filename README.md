@@ -1,6 +1,6 @@
 # Icon Frame
 
-<p align="center"><img src="" width="480px"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/ionutrogojan/icon_frame/main/frontend/assets/icon_frame.svg" width="480px"/></p>
 
 A small and easy to use icon builder. Build icons for your applications with `.icns` for MacOS and `.ico` for Windows.
 
