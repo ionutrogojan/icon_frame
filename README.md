@@ -9,16 +9,15 @@ Made wit ❤️ and [Tauri](https://github.com/tauri-apps/tauri)
 ### Current save options:
 
 - [x] .icns
-- [ ] .ico
+- [x] .ico
 
 #
 
 TODO:
-- [ ] better slider
-- [ ] add `.ico` save option
+- [ ] error handling on `color type: indexed`;
+- [ ] add indicator `click` to update slider value and preview;
+- [ ] allow file size skipping;
 
 #
 
 INPROGRESS:
-- [ ] file input icons
-- [ ] icon format selector

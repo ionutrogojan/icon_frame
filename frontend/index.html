@@ -6,34 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Icon Frame</title>
   <link rel="stylesheet" href="./global.css">
-  <script src="main.js" defer ></script>
+  <script src="main.js" defer type="module"></script>
 </head>
 <body>
   <section class="image-preview">
     <img id="preview_image" src="./assets/icon_frame.svg" alt="icon preview">
   </section>
   <section class="preview-controls">
-    <input type="range" min="16" max="1024" value="16" id="preview_size" list="preview_scale">
-    <div class="preview-scale" id="preview_indicator">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <input id="preview_slider" type="range" min="16" max="512" value="16">
+    <div id="preview_indicators"><!-- spawn indicators here --></div>
   </section>
   <section class="file-system">
-    <button class="button" id="type_button">.icns</button>
-    <div id="file_system">
-      <button class="input" id="file_16">16px</button>
-      <button class="input" id="file_32">32px</button>
-      <button class="input" id="file_128">128px</button>
-      <button class="input" id="file_256">256px</button>
-      <button class="input" id="file_512">512px</button>
-      <button class="input" id="file_1024">1024px</button>
-    </div>
-    <button class="button" id="export_button">Export</button>
+    <button id="button_type">
+      <span data-active="true">.icns</span>
+      <span>.ico</span>
+    </button>
+    <div id="file_system" ><!-- spawn inputs here --></div>
+    <button id="button_export">Export</button>
   </section>
 </body>
 </html>

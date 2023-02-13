@@ -69,7 +69,7 @@ body {
   justify-content: space-between;
 }
 
-#preview_size {
+#preview_slider {
   -webkit-appearance: none;
   appearance: none;
   background-color: var(--button);
@@ -78,7 +78,7 @@ body {
   margin-top: 10px;
 }
 
-#preview_size::-webkit-slider-thumb {
+#preview_slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   cursor: pointer;
@@ -88,7 +88,7 @@ body {
   border-radius: 4px;
 }
 
-.preview-scale {
+#preview_indicators {
   width: 100%;
   height: 24px;
   display: flex;
@@ -96,7 +96,7 @@ body {
   align-items: flex-end;
 }
 
-.preview-scale > span {
+#preview_indicators > span {
   cursor: pointer;
   background-color: var(--active-accent);
   width: 10px;
@@ -115,13 +115,14 @@ body {
   gap: 40px;
 }
 
-.file-system > div {
+#file_system {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.button {
+/* buttons */
+button[id^=button] {
   cursor: pointer;
   background-color: var(--button);
   width: 100%;
@@ -133,21 +134,102 @@ body {
   position: relative;
 }
 
-.input {
-  cursor: pointer;
-  background-color: var(--preview);
-  width: 100%;
-  height: 48px;
-  border: 1px solid var(--button);
-  border-radius: 10px;
-  color: var(--text-white);
-  font-size: 16px;
-  padding: 0 24px;
-  white-space: nowrap;
-  position: relative;
+/* type button */
+button[id$=type] {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  padding: 0;
 }
 
-.input:hover::before, .input:focus::before, .button:hover::before {
+button[id$=type] > span {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+/* type hover common */
+button[id$=type] > span:hover {
+  color: var(--active-accent);
+}
+
+/* icns */
+button[id$=type] span:first-child {
+  position: relative;
+  border-radius: 10px 0 0 10px;
+}
+
+/* icns hover */
+button[id$=type] span:first-child:hover::before {
+  content: "";
+  position: absolute;
+  top: -4px; /* border: 2px + offset: 2px */
+  right: 0;
+  bottom: -4px;
+  left: -4px;
+  border: 2px solid var(--active-accent);
+  border-radius: 12px 0 0 12px; /* border-radius: 10px + offset: 2px */
+}
+
+/* ico */
+button[id$=type] span:last-child {
+  position: relative;
+  border-radius: 0 10px 10px 0;
+}
+
+/* ico hover */
+button[id$=type] span:last-child:hover::before {
+  position: relative;
+  border-radius: 0 10px 10px 0;
+  content: "";
+  position: absolute;
+  top: -4px; /* border: 2px + offset: 2px */
+  right: -4px;
+  bottom: -4px;
+  left: 0;
+  border: 2px solid var(--active-accent);
+  border-radius: 0 12px 12px 0; /* border-radius: 10px + offset: 2px */
+}
+
+/* active type */
+button[id$=type] > span[data-active="true"] {
+  background-color: var(--preview);
+  color: var(--active-accent);
+}
+
+/* fs input */
+button[id^=input] {
+  cursor: pointer;
+  position: relative;
+  background-color: var(--preview);
+  color: var(--text-white);
+  width: 100%;
+  height: 48px;
+  padding: 0 24px;
+  border: 1px solid var(--button);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 12px 50px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 14px;
+}
+
+button[id^=input] > img {
+  width: 12px;
+  height: 12px;
+}
+
+button[id^=input]:hover::before,
+button[id^=input]:focus::before,
+button[id$=export]:hover::before,
+button[id$=export]:focus::before {
   content: "";
   position: absolute;
   top: -4px; /* border: 2px + offset: 2px */
