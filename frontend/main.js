@@ -29,7 +29,7 @@ setFormat(type_buttons, 0);
 
 // set icon type [ .icns | .ico ]
 type_buttons.forEach((type, index) => type.addEventListener("click", () => setFormat(type_buttons, index), false));
-// export the icon file
+// export the icon file 
 export_button.addEventListener("click", () => saveFile(), false);
 
 function setFormat(parent, index) {
@@ -40,7 +40,7 @@ function setFormat(parent, index) {
   preview.reset(sizes[format][0], sizes[format][5]);
 
   preview.type = format;
-  
+
   parent.forEach(element => element.dataset.active = "false"); // reset all type style
   parent[index].dataset.active = "true"; // set active style
 
