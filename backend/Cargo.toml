@@ -1,7 +1,7 @@
 [package]
 name = "icon-frame"
-version = "0.1.2"
-description = "A Tauri App"
+version = "0.1.3"
+description = "Icon bundler for icns and ico file formats"
 authors = ["Ionut Rogojan"]
 license = "GPL v2"
 repository = "https://github.com/ionutrogojan/icon_frame"

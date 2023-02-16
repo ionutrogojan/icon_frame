@@ -28,7 +28,7 @@ const active_accent = [ "#7FCC33", "#765EED", "#5C84D6", "#FF884C" ];
 // default setup
 document.body.style = `--active-accent: ${active_accent[Math.floor(Math.random() * active_accent.length)]}`;
 setFormat(type_buttons, 0);
-document.oncontextmenu = () => false; // prevent right click
+// document.oncontextmenu = () => false; // prevent right click
 
 // set icon type [ .icns | .ico ]
 type_buttons.forEach((type, index) => type.addEventListener("click", () => setFormat(type_buttons, index), false));
@@ -61,29 +61,23 @@ async function selectFile(index) {
 				file_system.links[index] = file_path; // set the link index to the path value
 				file_system.update_input(sizes[format][index], `...${await file_path.slice(file_path.length - 25, file_path.length)}`); // update the input path
 				preview.links[index] = convertFileSrc(file_path); // update the preview link
-			} else {
-				notify_error(res, index);
-			}
+				preview.slide(index); // update slider value based on file input
+			} else { notify_error(res, index); }
 		});
 	}
 }
 
 async function saveFile() {
-	// all files selected
-	if (file_system.links.length >= 6) {
+	console.log(file_system.links.length);
+	// at least one file
+	if (file_system.links.length > 0) {
 		const file_path = await save({ title: "Save File", filters: [{ name: format, extensions: [ format ] }] }); // save path destination
 		// cancel process check
 		if (file_path != null) {
 			// backend call to process and save the file
 			invoke("save_file", { format, files: file_system.links, path: file_path }).then(res => notify_save(res));
 		}
-	} else {
-		// loop through the links
-		for (let i = 0; i < 6; i++) {
-			// if the link is missing, focus the element and break the loop
-			if (file_system.links[i] === undefined) { file_system.focus_input(i); break }
-		}
-	}
+	} else { file_system.focus_input(0); }
 }
 
 async function notify_save(body) {
@@ -91,6 +85,7 @@ async function notify_save(body) {
 	// reset to default values
 	file_system.reset();
 	preview.reset(sizes[format][0], sizes[format][5]);
+	setFormat(type_buttons, 0); // TODO: remember type to restart using the active choice
 }
 
 async function notify_error(body, index) {

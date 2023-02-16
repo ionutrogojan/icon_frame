@@ -7,6 +7,7 @@ export default class Preview {
     min;
     max;
     type;
+    steps;
     
     constructor(image, slider, indicators) {
         for (let i = 0; i < 6; i++) { document.querySelector(`${indicators}`).appendChild(document.createElement("span")) } // create the indicators
@@ -18,6 +19,11 @@ export default class Preview {
         this.max = 512;
         this.type = "icns";
         this.slider.addEventListener("input", () => this.update(this.slider.value), false);
+        this.steps = {
+            icns: [ 16, 112, 214, 312, 414, 512 ],
+            ico: [16 , 62, 112, 160, 210, 256],
+        }
+        this.indicators.forEach((indicator, index) => indicator.addEventListener("click", () => this.slide(index), false));
     }
 
     reset(min, max) {
@@ -32,16 +38,16 @@ export default class Preview {
     }
 
     update(value) {
-        const steps = {
-            icns: [ 16, 112, 214, 312, 414, 512 ],
-            ico: [16 , 62, 112, 160, 210, 256],
-        }
-        const index = this.#closest(value, steps[this.type]);
+        const index = this.#closest(value, this.steps[this.type]);
         if (this.links[index] != undefined) {
             this.image.setAttribute("src", this.links[index]);
         }
-        console.log(value);
         this.image.width = value;
+    }
+
+    slide(index) {
+        this.slider.value = this.steps[this.type][index];
+        this.slider.dispatchEvent(new Event("input"));
     }
 
     #closest(value, array) {

@@ -1,8 +1,14 @@
+@font-face {
+  font-family: "Red Hat Text";
+  src: url("./assets/RedHatText-Medium.ttf");
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   -webkit-user-drag: none;
   user-select: none;
   margin: 0;
+  font-family: 'Red Hat Text', sans-serif;
 }
 
 :root {
@@ -10,7 +16,6 @@
   line-height: 24px;
   font-weight: 400;
 
-  font-synthesis: none;
   text-rendering: optimizeLegibility;
 
   --window: #1D1E2A;

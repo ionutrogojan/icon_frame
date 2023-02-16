@@ -19,9 +19,9 @@ Made wit ❤️ and [Tauri](https://github.com/tauri-apps/tauri)
 
 TODO:
 - [ ] check matching file width/height to the input requirement
-- [ ] allow file size skipping;
+- [ ] settings popup and app info (theme support: dark, light, high-contrast)
 
 #
 
-INPROGRESS:
-- [ ] add indicator `click` to update slider value and preview;
+NEXT:
+- [ ] remember active icon type on export to reset back to it
