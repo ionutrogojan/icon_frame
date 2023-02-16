@@ -42,6 +42,26 @@ fn write_ico(files: Vec<String>, path: &String) {
 }
 
 #[tauri::command]
+fn check_file(format: String, file: String) -> String {
+    let file_data = BufReader::new(File::open(file).unwrap());
+    match format.as_str() {
+        "icns" => {
+            match Image::read_png(file_data) {
+                Ok(_) => String::from("passed"),
+                Err(e) => e.to_string(),
+            }
+        },
+        "ico" => {
+            match IconImage::read_png(file_data) {
+                Ok(_) => String::from("passed"),
+                Err(e) => e.to_string(),
+            }
+        },
+        _ => String::from("Unable to perform file check due to unknown reasons")
+    }
+}
+
+#[tauri::command]
 fn save_file(format: String, files: Vec<String>, path: String) -> String {
     match format.as_str() {
         "icns" => write_icns(files, &path),
@@ -54,7 +74,7 @@ fn save_file(format: String, files: Vec<String>, path: String) -> String {
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![save_file])
+        .invoke_handler(tauri::generate_handler![save_file, check_file])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

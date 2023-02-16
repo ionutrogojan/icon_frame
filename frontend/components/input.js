@@ -6,6 +6,7 @@ export default class fs {
     constructor(parent) {
         this.parent = document.querySelector(`${parent}`);
         this.links = [];
+        this.dialog = document.querySelector("#test");
     }
 
     append_input(file_size) {

@@ -8,18 +8,20 @@ Made wit ❤️ and [Tauri](https://github.com/tauri-apps/tauri)
 
 #
 
-### Current save options:
+## Usage
 
-- [x] .icns
-- [x] .ico
+- Select the preferred icon type using the top-right buttons
+- Input the required files in the appropriate fields
+- Preview the icon at different sizes using the bottom-left slider
+- Export your newly created icon to the selected format
 
 #
 
 TODO:
-- [ ] error handling on `color type: indexed`;
-- [ ] add indicator `click` to update slider value and preview;
+- [ ] check matching file width/height to the input requirement
 - [ ] allow file size skipping;
 
 #
 
 INPROGRESS:
+- [ ] add indicator `click` to update slider value and preview;
