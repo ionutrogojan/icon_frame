@@ -2,6 +2,8 @@
 const { invoke, convertFileSrc } = window.__TAURI__.tauri;
 const { open, save } = window.__TAURI__.dialog;
 const { sendNotification } = window.__TAURI__.notification;
+const { listen } = window.__TAURI__.event;
+const { window_element } = window.__TAURI__.window;
 
 // imports
 import FS from "./components/input.js";
@@ -28,7 +30,7 @@ const active_accent = [ "#7FCC33", "#765EED", "#5C84D6", "#FF884C" ];
 // default setup
 document.body.style = `--active-accent: ${active_accent[Math.floor(Math.random() * active_accent.length)]}`;
 setFormat(type_buttons, 0);
-// document.oncontextmenu = () => false; // prevent right click
+document.oncontextmenu = () => false; // prevent right click
 
 // set icon type [ .icns | .ico ]
 type_buttons.forEach((type, index) => type.addEventListener("click", () => setFormat(type_buttons, index), false));
@@ -56,7 +58,7 @@ async function selectFile(index) {
 	// cancel process check
 	if (file_path != null) {
 		// valid file check
-		invoke("check_file", { format, file: file_path }).then(async res => {
+		invoke("validate_file", { format, file: file_path, inputSize: sizes[format][index] }).then(async res => {
 			if (res === "passed") {
 				file_system.links[index] = file_path; // set the link index to the path value
 				file_system.update_input(sizes[format][index], `...${await file_path.slice(file_path.length - 25, file_path.length)}`); // update the input path
@@ -68,14 +70,17 @@ async function selectFile(index) {
 }
 
 async function saveFile() {
-	console.log(file_system.links.length);
 	// at least one file
 	if (file_system.links.length > 0) {
 		const file_path = await save({ title: "Save File", filters: [{ name: format, extensions: [ format ] }] }); // save path destination
 		// cancel process check
 		if (file_path != null) {
-			// backend call to process and save the file
-			invoke("save_file", { format, files: file_system.links, path: file_path }).then(res => notify_save(res));
+			const image_path = () => { 
+				if(!file_path.endsWith(`.${format}`)) return file_path.concat(`.${format}`) // append extension if not specified
+				else { return file_path } // don't append if existing
+			}
+			const links_list = file_system.links.filter(value => value != undefined); // prevent undefined values to be passed to backend
+			invoke("save_file", { format, files: links_list, path: image_path(), window_element}).then(res => notify_save(res)); // backend call to process and save the file
 		}
 	} else { file_system.focus_input(0); }
 }
@@ -85,7 +90,13 @@ async function notify_save(body) {
 	// reset to default values
 	file_system.reset();
 	preview.reset(sizes[format][0], sizes[format][5]);
-	setFormat(type_buttons, 0); // TODO: remember type to restart using the active choice
+	const active = () => {
+		switch (format) {
+			case "ico": return 1
+			case "icns": return 0 
+		}
+	} // get the active format and reset to it
+	setFormat(type_buttons, active());
 }
 
 async function notify_error(body, index) {
@@ -93,3 +104,7 @@ async function notify_error(body, index) {
 	error_dialog.open(body); // show error message
 	error_dialog.close(file_system.focus_input(index)); // callback focus bad input on dialog closed
 }
+
+await listen("backend_error", (event) => {
+	notify_error(event.payload, 0) // TODO: get input index if necessary to focus
+});
