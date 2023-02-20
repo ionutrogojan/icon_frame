@@ -3,7 +3,7 @@ description: Report a bug/issue
 title: "[Bug]: "
 labels: [bug]
 body:
-- type: input
+  - type: input
     id: version
     attributes:
       label: Version
@@ -11,7 +11,7 @@ body:
       placeholder: 0.1.0
     validations:
       required: true
-- type: dropdown
+  - type: dropdown
     id: operating-system
     attributes:
       label: Operating System
@@ -22,7 +22,7 @@ body:
         - MacOs (arm)
     validations:
       required: true
-- type: textarea
+  - type: textarea
     id: what-happened
     attributes:
       label: What happened?
