@@ -6,6 +6,7 @@ use std::fs::File;
 use std::io::{ BufReader, BufWriter, Error };
 
 mod libpng;
+mod libaurochs;
 
 fn get_image(path: &str) -> Result<BufReader<File>, Error>{
     let file = File::open(path)?;

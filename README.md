@@ -16,7 +16,7 @@ A small and easy to use icon builder. Build icons for your applications with `.i
 #
 
 TODO:
-- [ ] Overwriting icons seems to make the unable to decode. Looking into it
+- [ ] Overwriting icons seems to make them unable to decode. Looking into it
 
 #
 

@@ -1085,7 +1085,7 @@ dependencies = [
 
 [[package]]
 name = "icon-frame"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "icns",
  "ico 0.3.0",
