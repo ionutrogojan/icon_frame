@@ -45,8 +45,6 @@ type_buttons.forEach((type, index) => type.addEventListener("click", () => setFo
 export_button.addEventListener("click", saveFile, false); // export the icon file 
 about_button.addEventListener("click", () => about_dialog.open(), false);
 
-(document.querySelector("#about_dialog") as HTMLDialogElement).showModal();
-
 function setFormat(parent: Element[], index: number) {
 	if (index === 1) { format = "ico" } // update if necessary
 	else { format = "icns" } // switch back
