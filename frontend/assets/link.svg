@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+  <path style="stroke-linejoin: round; stroke-linecap: round; stroke: rgb(255, 255, 255); stroke-width: 2px; fill: none;" d="M 6 1 L 11 1 L 11 6"/>
+  <path style="stroke-width: 2px; stroke: rgb(255, 255, 255); stroke-linecap: round;" d="M 11 1 L 5 7"/>
+  <path style="fill: none; stroke-width: 2px; stroke: rgb(255, 255, 255); stroke-linecap: round;" d="M 4 4 L 2 4 C 1.5 4 1 4.5 1 5 L 1 10 C 1 10.5 1.5 11 2 11 L 7 11 C 7.5 11 8 10.5 8 10 L 8 8"/>
+</svg>

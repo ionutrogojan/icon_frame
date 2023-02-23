@@ -14,15 +14,18 @@ const { window_element } = window.__TAURI__.window;
 import FS from "./components/input.js";
 import Preview from "./components/preview.js";
 import Message from "./components/message.js";
+import About from "./components/about.js";
 
 // components
 const file_system = new FS("#file_system");
 const preview = new Preview("#preview_image", "#preview_slider", "#preview_indicators");
 const error_dialog = new Message("#error_dialog");
+const about_dialog = new About("#about_dialog");
 
 // elements
 const type_buttons = Array.from((document.querySelector("#button_type") as HTMLButtonElement).children);
 const export_button = document.querySelector("#button_export") as HTMLButtonElement;
+const about_button = document.querySelector("#button_about") as HTMLButtonElement;
 
 // variables
 const sizes = {
@@ -36,12 +39,13 @@ const active_accent = [ "#7FCC33", "#765EED", "#5C84D6", "#FF884C" ];
 // @ts-ignore
 document.body.style = `--active-accent: ${active_accent[Math.floor(Math.random() * active_accent.length)]}`;
 setFormat(type_buttons, 0);
-// document.oncontextmenu = () => false; // prevent right click
+document.oncontextmenu = () => false; // prevent right click
 
-// set icon type [ .icns | .ico ]
-type_buttons.forEach((type, index) => type.addEventListener("click", () => setFormat(type_buttons, index), false));
-// export the icon file 
-export_button.addEventListener("click", saveFile, false);
+type_buttons.forEach((type, index) => type.addEventListener("click", () => setFormat(type_buttons, index), false)); // set icon type [ .icns | .ico ]
+export_button.addEventListener("click", saveFile, false); // export the icon file 
+about_button.addEventListener("click", () => about_dialog.open(), false);
+
+(document.querySelector("#about_dialog") as HTMLDialogElement).showModal();
 
 function setFormat(parent: Element[], index: number) {
 	if (index === 1) { format = "ico" } // update if necessary
@@ -113,6 +117,6 @@ async function notify_error(body: string, index: number) {
 	error_dialog.close(file_system.focus_input(index)); // callback focus bad input on dialog closed
 }
 
-await listen("backend_error", (event: { payload: any; }) => {
+await listen("backend_error", (event: { payload: string; }) => {
 	notify_error(event.payload, 0) // TODO: get input index if necessary to focus
 });

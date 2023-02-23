@@ -22,13 +22,37 @@
       <span>.ico</span>
     </button>
     <div id="file_system" ><!-- spawn inputs here --></div>
-    <button id="button_export">Export</button>
+    <div class="bottom">
+      <button id="button_about"><img src="./assets/settings.svg" alt="*"></button>
+      <button id="button_export">Export</button>
+    </div>
   </section>
   <dialog id="error_dialog">
     <h3>Error <span>(҂◡_◡)</span></h3>
     <p></p>
     <button id="button_export">Close</button>
   </dialog>
-  <span id="test"></span>
+  <dialog id="about_dialog"> <!-- TODO: about -->
+    <img class="about-close" id="about_close" src="./assets/close.svg" alt="x">
+    <div class="about-info">
+      <img class="about-icon" src="./assets/icon_frame.svg" alt="icon-frame">
+      <h3 class="about-title">Icon Frame</h3>
+      <p class="about-author">Ionut Rogojan <span>/</span> GPL v2</p>
+      <p class="about-version">v0.1.5</p>
+    </div>
+    <section class="about-links">
+      <a class="about-button" href="https://github.com/ionutrogojan/icon_frame/releases" target="_blank" rel="noopener noreferrer"><span>Check for Updates</span><img src="./assets/link.svg" alt="link"></a>
+      <a class="about-button" href="https://github.com/ionutrogojan/icon_frame/issues/new/choose" target="_blank" rel="noopener noreferrer"><span>Report an Issue</span><img src="./assets/link.svg" alt="link"></a>
+      <div class="about-dependencies">
+        <p>Dependencies</p>
+        <a href="https://github.com/tauri-apps/tauri" target="_blank" rel="noopener noreferrer"><span>tauri</span><img src="./assets/link.svg" alt="link"></a>
+        <a href="https://crates.io/crates/serde" target="_blank" rel="noopener noreferrer"><span>serde</span><img src="./assets/link.svg" alt="link"></a>
+        <a href="https://crates.io/crates/serde_json" target="_blank" rel="noopener noreferrer"><span>serde_json</span><img src="./assets/link.svg" alt="link"></a>
+        <a href="https://crates.io/crates/icns" target="_blank" rel="noopener noreferrer"><span>icns</span><img src="./assets/link.svg" alt="link"></a>
+        <a href="https://crates.io/crates/ico" target="_blank" rel="noopener noreferrer"><span>ico</span><img src="./assets/link.svg" alt="link"></a>
+        <a href="https://www.redhat.com/en/about/brand/standards/typography" target="_blank" rel="noopener noreferrer"><span>RedHatText-Medium</span><img src="./assets/link.svg" alt="link"></a>
+      </div>
+    </section>
+  </dialog>
 </body>
 </html>

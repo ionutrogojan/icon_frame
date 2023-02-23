@@ -1,6 +1,6 @@
-name: Bug
+name: Bug 🐛
 description: Report a bug/issue
-title: "[Bug 🐛]: "
+title: "Bug 🐛: "
 labels: [bug]
 body:
   - type: input
@@ -28,6 +28,6 @@ body:
       label: What happened and what did you expect?
       description: Explain in detail what happened and what was the expected behaviour? (include pictures if possible)
       placeholder: Tell us what you see!
-      value: "A bug happened!"
+      value: "A bug happened! Look at this\n ![image](https://link-to-image)"
     validations:
       required: true

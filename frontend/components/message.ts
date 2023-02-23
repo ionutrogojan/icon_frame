@@ -6,7 +6,7 @@ export default class Message {
     }
 
     open(message: string) {
-        (this.parent as HTMLDialogElement).showModal(); // show modal element
+        this.parent.showModal(); // show modal element
         (this.parent.querySelector("p") as HTMLParagraphElement).innerText = message; // update modal message
     }
 

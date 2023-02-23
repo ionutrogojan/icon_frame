@@ -6,7 +6,7 @@ use std::fs::File;
 use std::io::{ BufReader, BufWriter, Error };
 
 mod libpng;
-mod libaurochs;
+mod aurochs;
 
 fn get_image(path: &str) -> Result<BufReader<File>, Error>{
     let file = File::open(path)?;
@@ -116,7 +116,12 @@ fn save_file(format: String, files: Vec<String>, path: String, window: tauri::Wi
     return path;
 }
 
+// fn generate_html() -> String {
+//     return lib_html::new("test");
+// }
+
 fn main() {
+    // generate_html(); // send this to the webview to render
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![save_file, validate_file])
         .run(tauri::generate_context!())
